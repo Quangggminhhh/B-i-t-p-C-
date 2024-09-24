@@ -1,7 +1,5 @@
 #include <iostream>
 using namespace std;
-
-
 int* noiMang(int* a, int sizeA, int* b, int sizeB, int& Size) {
     Size = sizeA + sizeB;
     int* a1 = new int[Size]; 
