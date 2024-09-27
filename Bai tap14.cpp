@@ -19,7 +19,7 @@ int main()
 	cin>>m.Tendaodien;
 	cout<<"Nhap nam phat hanh: ";
 	cin>>m.Namphathanh;
-	cout<<"Nhap thoi luong cua phim: "; cin>>m.Thoiluong; "(phut)";
+	cout<<"Nhap thoi luong cua phim: "; cin>>m.Thoiluong; 
 	cout<<"\nThong tin ve mot bo phim: \n";
 	cout<<"Ten phim: "<<m.Tenphim<<endl;
 	cout<<"Dao dien: "<<m.Tendaodien<<endl;

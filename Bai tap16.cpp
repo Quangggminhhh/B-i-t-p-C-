@@ -22,12 +22,13 @@ int main()
 	getline(cin, m.Tendaodien);
 	cout<<"Nhap nam phat hanh: ";
 	cin>>m.Namphathanh;
+		cout<<"Nhap thoi luong cua phim: "; cin>>m.Thoiluong; 
 	cout<<"Chi phi san xuat:  ";
 	cin>>m.Chiphisanxuat;
 	cout<<"Doanh thu nam dau: ";
 	cin>>m.Doanhthunamdau;
 	m.Doanhthu= m.Doanhthunamdau - m.Chiphisanxuat;
-	cout<<"Nhap thoi luong cua phim: "; cin>>m.Thoiluong; 
+
 	cout<<"\nThong tin ve mot bo phim: \n";
 	cout<<"Ten phim: "<<m.Tenphim<<endl;
 	cout<<"Dao dien: "<<m.Tendaodien<<endl;
