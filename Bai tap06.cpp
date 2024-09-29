@@ -1,64 +1,74 @@
-#include<iostream>
-#include<algorithm>
+#include <iostream>
 using namespace std;
-void Sapxepdiem(double *diem,int size){
-	sort (diem, diem + size);
-}
-double Diemtrungbinh(double *diem, int size)
-{
-	double S=0;
-	int i=0;
-	for(i=0;i<size;i++){
-		S+=*(diem+i);
-		
-	}
-	return S/size;
-}
+
+void arrSelectSort(int *[], int);
+void showArray(const int [], int);
+void showArrPtr(int *[], int);
+
 int main()
 {
-	int Soluongdiem;
-	cout<<"Nhap so luong diem kiem tra: "; 
-	cin>>Soluongdiem;
-	if(Soluongdiem<=0){
-		cout<<"So luong diem phai lon hon 0"<<endl;
-		return 1;
-	}
-	double *diem=new double [Soluongdiem];
-	for (int i=0;i<Soluongdiem;++i){
-		do{
-			cout<<"Nhap diem kiem tra thu "<< i+1 <<":";
-			cin>> diem[i]<0;
-			if (diem[i]<0){
-				cout<<"Diem khong duoc la so am. Vui long nhap lai "<<endl;
-			}
-		}
-		while(*(diem+i)<0);
-	}
-	Sapxepdiem(diem,Soluongdiem);
-	double a=Diemtrungbinh(diem,Soluongdiem);
-	cout<<"\nDanh sach diem da sap xep: \n";
-	for (int i = 0; i <Soluongdiem; ++i)
-		{
-			cout<< diem [i]<< " ";
-		}
-	cout <<"\nDiem trung binh: "<<a<<endl; 
-	  int Soluongdonggop;
-    cout << "Nhap luong dong gop: ";
-    cin >> Soluongdonggop;
-    while (Soluongdonggop <= 0) {
-        cout << "So luong dong gop phai lon hon 0. Nhap lai. ";
-        cin >> Soluongdonggop;
+    int NUM_DONATIONS;
+    cout << "THE NUMBER OF DONATIONS: ";
+    cin >> NUM_DONATIONS;
+
+    if (NUM_DONATIONS <= 0 || NUM_DONATIONS > 1000) {
+        cout << "Invalid number of donations." << endl;
+        return 1;
     }
 
-    double* Donggop = new double[Soluongdonggop];
-    for (int i = 0; i < Soluongdonggop; ++i) {
-        cout << "Nhap diem dong gop " << (i + 1) << ": ";
-        cin >> Donggop[i];
+    int *donations = new int[NUM_DONATIONS];
+    cout << "Enter donations:\n";
+    for (int i = 0; i < NUM_DONATIONS; i++) {
+        cin >> donations[i];
     }
-    cout << "\nCac dong gop:\n";
-    for (int i = 0; i < Soluongdonggop; ++i) {
-        cout << "Dong gop" << (i + 1) << ": " << Donggop[i] <<endl;
+
+    int *arrPtr[NUM_DONATIONS];
+    for (int count = 0; count < NUM_DONATIONS; count++) {
+        arrPtr[count] = &donations[count];
     }
-    delete[] Donggop;
-	delete[] diem; 
-	}
+
+    arrSelectSort(arrPtr, NUM_DONATIONS);
+
+    cout << "The donations, sorted in ascending order, are:\n";
+    showArrPtr(arrPtr, NUM_DONATIONS);
+
+    cout << "The donations, in their original order, are:\n";
+    showArray(donations, NUM_DONATIONS);
+
+    delete[] donations;  
+    return 0;
+}
+
+void arrSelectSort(int *arr[], int size)
+{
+    int startScan, minIndex;
+    int *minElem;
+
+    for (startScan = 0; startScan < (size - 1); startScan++) {
+        minElem = arr[startScan];
+        minIndex = startScan;
+        for (int index = startScan + 1; index < size; index++) {
+            if (*(arr[index]) < *minElem) {
+                minElem = arr[index];
+                minIndex = index;
+            }
+        }
+        arr[minIndex] = arr[startScan];
+        arr[startScan] = minElem;
+    }
+}
+
+void showArray(const int arr[], int size)
+{
+    for (int count = 0; count < size; count++)
+        cout << arr[count] << " ";
+    cout << endl;
+}
+
+void showArrPtr(int *arr[], int size)
+{
+    for (int count = 0; count < size; count++)
+        cout << *(arr[count]) << " ";
+    cout << endl;
+}
+

@@ -1,65 +1,63 @@
 #include <iostream>
-#include <algorithm>
-#include <cstring>
 using namespace std;
+void arrSelectSort(int *[], int);
+void showArray(const int [], int);
+void showArrPtr(int *[], int);
 
-void Sapxepdiem(double *diem, string *ten, int size) {
-    for (int i = 0; i < size - 1; ++i) {
-        for (int j = 0; j < size - i - 1; ++j) {
-            if (diem[j] < diem[j + 1]) {
-                swap(diem[j], diem[j + 1]);
-                swap(ten[j], ten[j + 1]); 
+int main()
+{
+    const int NUM_DONATIONS = 15;  
+
+    int donations[NUM_DONATIONS] = { 5, 100, 5, 25, 10, 5, 25, 5, 5, 100, 10, 15, 10, 5, 10 };
+
+    int *arrPtr[NUM_DONATIONS];
+
+    for (int count = 0; count < NUM_DONATIONS; count++)
+        arrPtr[count] = &donations[count];
+
+    arrSelectSort(arrPtr, NUM_DONATIONS);
+    cout << "The donations, sorted in ascending order, are:\n";
+    showArrPtr(arrPtr, NUM_DONATIONS);
+
+    cout << "The donations, in their original order, are:\n";
+    showArray(donations, NUM_DONATIONS);
+
+    return 0;
+}
+
+void arrSelectSort(int *arr[], int size)
+{
+    int startScan, minIndex;
+    int *minElem;
+
+    for (startScan = 0; startScan < (size - 1); startScan++)
+    {
+        minElem = arr[startScan];
+        minIndex = startScan;
+        for (int index = startScan + 1; index < size; index++)
+        {
+            if (*(arr[index]) < *minElem)  
+            {
+                minElem = arr[index];
+                minIndex = index;
             }
         }
+        arr[minIndex] = arr[startScan];
+        arr[startScan] = minElem;
     }
 }
 
-void NhapDiemVaTen(string *ten, double *diem, int size) {
-    for (int i = 0; i < size; ++i) {
-        cout << "Nhap ten hoc sinh thu " << i + 1 << ": ";
-        cin >> ten[i];
-        do {
-            cout << "Nhap diem kiem tra cho " << ten[i] << ": ";
-            cin >> diem[i];
-            if (diem[i] < 0) {
-                cout << "Diem khong duoc la so am. Vui long nhap lai." << endl;
-            }
-        } while (diem[i] < 0);
-    }
+void showArray(const int arr[], int size)
+{
+    for (int count = 0; count < size; count++)
+        cout << arr[count] << " ";
+    cout << endl;
 }
-double DiemTrungBinh(double *diem, int size) {
-    double S = 0;
-    for (int i = 0; i < size; i++) {
-        S += diem[i];
-    }
-    return S / size;}
 
-int main() {
-    int Soluonghocsinh;
-    cout << "Nhap so luong hoc sinh: "; 
-    cin >> Soluonghocsinh;
-
-    if (Soluonghocsinh <= 0) {
-        cout << "So luong hoc sinh phai lon hon 0" << endl;
-        return 1;
-    }
-    
-    string *ten = new string[Soluonghocsinh];
-    double *diem = new double[Soluonghocsinh];
-
-    NhapDiemVaTen(ten, diem, Soluonghocsinh);
-    
-    Sapxepdiem(diem, ten, Soluonghocsinh);
-    
-    cout << "\nDanh sach diem da sap xep: \n";
-    for (int i = 0; i < Soluonghocsinh; ++i) {
-        cout << ten[i] << ": " << diem[i] << endl;
-    }
-    double a= DiemTrungBinh(diem, Soluonghocsinh);
-    cout << "\nDiem trung binh: " << a << endl;
-
-    delete[] ten; 
-    delete[] diem; 
-    return 0;
+void showArrPtr(int *arr[], int size)
+{
+    for (int count = 0; count < size; count++)
+        cout << *(arr[count]) << " ";
+    cout << endl;
 }
 
